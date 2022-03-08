@@ -18,7 +18,8 @@ pipeline {
         stage('run tests') {
             steps {
                 script {
-                    sh 'echo run tests'
+					sh "pip install -r requirements.txt"
+                    sh "python3 -m unittest microservice/tests/test_service.py"
                 }
             }
         }
