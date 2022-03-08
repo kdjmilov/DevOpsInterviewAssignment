@@ -18,7 +18,7 @@ pipeline {
         stage('run tests') {
             steps {
                 script {
-					sh "sudo apt-get update"
+					sh "apt-get update"
 					sh "apt-get install python3"
 					sh "python3 -m virtualenv venv"
 					sh "pip install -r requirements.txt"
