@@ -1,8 +1,7 @@
 pipeline {
     agent any
     environment {
-        registry = "kdjmilov/DevOpsInterviewAssignment"
-        registryCredential = 'docker_hub'
+		DOCKER_CRED = credentials('kdjmilov-dockerhub')
     }
     options {
         buildDiscarder(logRotator(numToKeepStr: '20', daysToKeepStr: '5' ))
