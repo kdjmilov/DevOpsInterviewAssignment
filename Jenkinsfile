@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        registry = "oekstein/DevOpsInterviewAssignment"
+        registry = "kdjmilov/DevOpsInterviewAssignment"
         registryCredential = 'docker_hub'
     }
     options {
