@@ -19,6 +19,7 @@ pipeline {
                 script {
 					sh "apt-get update"
 					sh "apt-get install python3 -y"
+					sh "apt-get install python3-pip -y"
 					sh "pip install virtualenv"
 					sh "python3 -m virtualenv venv"
 					sh "pip install -r requirements.txt"
