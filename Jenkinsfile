@@ -7,10 +7,6 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '20', daysToKeepStr: '5' ))
     }
     stages {
-		stage('Initialize'){
-			def dockerHome = tool 'myDocker'
-			env.PATH = "${dockerHome}/bin:${env.PATH}"
-		}
         stage('Pull Code') {
             steps {
                 script {
@@ -24,6 +20,7 @@ pipeline {
 					sh "apt-get update"
 					sh "apt-get install python3 -y"
 					sh "apt-get install python3-pip -y"
+					sh "apt-get install docker-ce docker-ce-cli containerd.io"
 					sh "pip install virtualenv"
 					sh "python3 -m virtualenv venv"
 					sh "pip install -r requirements.txt"
