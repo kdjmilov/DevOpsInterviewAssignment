@@ -7,6 +7,10 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '20', daysToKeepStr: '5' ))
     }
     stages {
+		stage('Initialize'){
+			def dockerHome = tool 'myDocker'
+			env.PATH = "${dockerHome}/bin:${env.PATH}"
+		}
         stage('Pull Code') {
             steps {
                 script {
