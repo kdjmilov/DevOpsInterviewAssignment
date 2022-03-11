@@ -21,7 +21,7 @@ pipeline {
 					sh "apt-get update"
 					sh "apt-get install python3 -y"
 					sh "apt-get install python3-pip -y"
-					sh "sudo apt update"
+					sh "apt update"
 					sh "apt-get install apt-transport-https ca-certificates curl software-properties-common"
 					sh "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -"
 					sh "apt-get update"
