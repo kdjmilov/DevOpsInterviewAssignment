@@ -17,12 +17,16 @@ pipeline {
         stage('run tests') {
             steps {
                 script {
+				
 					sh "apt-get update"
 					sh "apt-get install python3 -y"
 					sh "apt-get install python3-pip -y"
-					sh "apt-get install curl"
-					sh "curl -fsSL https://get.docker.com -o get-docker.sh"
-					sh "DRY_RUN=1 sh ./get-docker.sh"
+					sh "sudo apt update"
+					sh "apt-get install apt-transport-https ca-certificates curl software-properties-common"
+					sh "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -"
+					sh "add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs)  stable"
+					sh "apt update"
+					sh "apt-get install docker-ce"
 					sh "pip install virtualenv"
 					sh "python3 -m virtualenv venv"
 					sh "pip install -r requirements.txt"
