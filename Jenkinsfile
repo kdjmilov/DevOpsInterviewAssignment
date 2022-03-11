@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-		DOCKER_CRED = credentials('kdjmilov-dockerhub')
+		DOCKERHUB_CREDENTIALS = credentials('kdjmilov-dockerhub')
     }
     options {
         buildDiscarder(logRotator(numToKeepStr: '20', daysToKeepStr: '5' ))
@@ -30,8 +30,9 @@ pipeline {
         stage('build and push image') {
             steps {
                 script {
-                    sh 'build and push image to hub'
-                }
+                    sh "docker build . -t kdjmilov/homework:test"
+                }	sh "docker login --username $DOCKERHUB_CREDENTIALS_USR --password $DOCKERHUB_CREDENTIALS_PSW"
+                    sh "docker push kdjmilov/homework:test"
             }
         }
         stage('deploy image') {
