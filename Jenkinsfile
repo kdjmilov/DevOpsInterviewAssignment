@@ -2,6 +2,9 @@ pipeline {
     agent any
     environment {
 		DOCKERHUB_CREDENTIALS = credentials('kdjmilov-dockerhub')
+		registry = "kdjmilov/dato_homework"
+		registryCredential = 'kdjmilov'
+		dockerImage = ''
     }
     options {
         buildDiscarder(logRotator(numToKeepStr: '20', daysToKeepStr: '5' ))
@@ -31,18 +34,17 @@ pipeline {
         stage('build and push image') {
             steps {
                 script {
-                    sh "docker build . -t kdjmilov/homework:test"
-                    sh "docker login --username $DOCKERHUB_CREDENTIALS_USR --password $DOCKERHUB_CREDENTIALS_PSW"
-                    sh "docker push kdjmilov/homework:test"
+					dockerImage = docker.build registry + ":$BUILD_NUMBER"
 					}
             }
         }
         stage('deploy image') {
             steps {
-                script {
-                    sh 'build docker image'
-                }
-            }
-        }
-    }
+				script {
+					docker.withRegistry( '', registryCredential ) {
+						dockerImage.push()
+					}
+				}
+			}
+		}
 }
