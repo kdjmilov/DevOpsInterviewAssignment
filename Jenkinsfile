@@ -22,7 +22,7 @@ pipeline {
 					sh "apt-get install python3 -y"
 					sh "apt-get install python3-pip -y"
 					sh "apt update"
-					sh "apt-get install apt-transport-https ca-certificates curl software-properties-common"
+					sh "apt-get install apt-transport-https ca-certificates curl software-properties-common -y"
 					sh "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -"
 					sh "apt-get update"
 					sh "apt-get install docker-ce"
