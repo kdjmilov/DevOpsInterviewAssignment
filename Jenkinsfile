@@ -31,8 +31,9 @@ pipeline {
             steps {
                 script {
                     sh "docker build . -t kdjmilov/homework:test"
-                }	sh "docker login --username $DOCKERHUB_CREDENTIALS_USR --password $DOCKERHUB_CREDENTIALS_PSW"
+                    sh "docker login --username $DOCKERHUB_CREDENTIALS_USR --password $DOCKERHUB_CREDENTIALS_PSW"
                     sh "docker push kdjmilov/homework:test"
+					}
             }
         }
         stage('deploy image') {
