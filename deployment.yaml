@@ -16,4 +16,4 @@ spec:
     spec:
       containers:
       - name: microservice
-        image: microservice:latest
+        image: kdjmilov/homework:latest

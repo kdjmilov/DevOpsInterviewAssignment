@@ -37,16 +37,16 @@ pipeline {
                 script {
 					sh "curl -fsSL https://get.docker.com -o get-docker.sh"
 					sh "get-docker.sh"
-					sh "docker build . -t kdjmilov/homework:${BUILD_NUMBER}"
+					sh "docker build . -t kdjmilov/homework:latest"
 					sh "docker login --username $DOCKERHUB_CREDENTIALS_USR --password $DOCKERHUB_CREDENTIALS_PSW"
-					sh "docker push kdjmilov/homework:${BUILD_NUMBER}"
+					sh "docker push kdjmilov/homework:latest"
 				}
             }
         }
         stage('deploy image') {
             steps {
 				script {
-					sh "echo deploying"
+					sh "kubectl set image deployment/microservice-deployment microservice=kdjmilov/homework:latest"
 				}
 			}
 		}
