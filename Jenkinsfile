@@ -40,14 +40,13 @@ pipeline {
 					sh "docker build . -t kdjmilov/homework:${BUILD_NUMBER}"
 					sh "docker login --username $DOCKERHUB_CREDENTIALS_USR --password $DOCKERHUB_CREDENTIALS_PSW"
 					sh "docker push kdjmilov/homework:${BUILD_NUMBER}"
-					}
+				}
             }
         }
         stage('deploy image') {
             steps {
 				script {
 					sh "echo deploying"
-					}
 				}
 			}
 		}
